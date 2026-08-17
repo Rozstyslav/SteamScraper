@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.env
+steam_scraper.sqlite3
+steam_scraper.sqlite3-shm
+steam_scraper.sqlite3-wal

@@ -1,0 +1,16 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_PATH: /data/steam_scraper.sqlite3
+      BROWSER_BINARY: /usr/bin/chromium
+      BROWSER_HEADLESS: "true"
+    volumes:
+      - steam_scraper_data:/data
+    restart: unless-stopped
+    shm_size: "2gb"
+
+volumes:
+  steam_scraper_data:

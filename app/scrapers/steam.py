@@ -1,7 +1,7 @@
 import httpx
 
 from app.config import settings
-from app.exceptions import GameNotFoundError, SteamUpstreamError
+from app.exceptions import GameNotFoundError, SteamTimeoutError, SteamUpstreamError
 from app.models import GameSearchResult, Platforms
 
 
@@ -26,7 +26,7 @@ async def search_steam(query: str, limit: int) -> list[GameSearchResult]:
             response.raise_for_status()
             payload = response.json()
     except httpx.TimeoutException as exc:
-        raise SteamUpstreamError("Steam request timed out") from exc
+        raise SteamTimeoutError("Steam request timed out") from exc
     except (httpx.HTTPError, ValueError) as exc:
         raise SteamUpstreamError("Steam returned an invalid response") from exc
 
